@@ -151,6 +151,15 @@
             flex: 1;
         }
         
+        .presentation-title {
+            font-size: 1.2rem;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
         .greeting {
             font-size: 18px;
             color: var(--accent-orange);
@@ -176,6 +185,44 @@
             color: var(--text-light);
             max-width: 600px;
             line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .presenter-info {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            max-width: 500px;
+        }
+        
+        .presenter-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .presenter-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .presenter-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .presenter-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 3px;
+        }
+        
+        .presenter-value {
+            font-weight: 600;
+            color: var(--primary-blue);
         }
         
         .logo-presentation {
@@ -195,24 +242,32 @@
         
         .presenter {
             background-color: var(--white);
-            padding: 20px 30px;
+            padding: 25px 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
             text-align: center;
-            max-width: 350px;
+            max-width: 400px;
             border-top: 4px solid var(--accent-orange);
         }
         
         .presenter-name {
             font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             color: var(--primary-blue);
         }
         
         .presenter-title {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .presenter-company {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-top: 10px;
         }
         
         /* Slide 2: Masalah (The Pain Point) */
@@ -567,6 +622,10 @@
                 flex-direction: column;
                 gap: 20px;
             }
+            
+            .presenter-details {
+                justify-content: center;
+            }
         }
         
         @media (max-width: 768px) {
@@ -607,6 +666,15 @@
                 font-size: 1.5rem;
                 padding: 15px 40px;
             }
+            
+            .presenter-info {
+                padding: 15px;
+            }
+            
+            .presenter-details {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -628,6 +696,10 @@
             
             .closing-headline {
                 font-size: 2.5rem;
+            }
+            
+            .presentation-title {
+                font-size: 1rem;
             }
         }
     </style>
@@ -657,15 +729,35 @@
             <div class="slide slide-1">
                 <div class="slide-content">
                     <div class="intro-text">
+                        <!-- <div class="presentation-title">Presentasi Layanan Lombok Web Dev</div> -->
                         <div class="greeting">Selamat pagi semuanya</div>
                         <h1 class="main-headline">Digitalizing <span>Your Vision</span></h1>
-                        <p class="description">Hari ini saya ingin memperkenalkan sebuah agensi digital yang sedang berkembang pesat di daerah kita, yaitu Lombok Web Dev. Kami adalah solusi bagi siapa saja yang ingin punya kehadiran profesional di dunia maya.</p>
+                        <p class="description">Hari ini saya ingin memperkenalkan sebuah agensi digital yang sedang berkembang pesat di daerah kita, yaitu Lombok Web Dev. Mereka adalah solusi bagi siapa saja yang ingin punya kehadiran profesional di dunia maya.</p>
+                        
+                        <div class="presenter-info">
+                            <h3>Informasi Presenter</h3>
+                            <div class="presenter-details">
+                                <div class="presenter-item">
+                                    <div class="presenter-label">Nama</div>
+                                    <div class="presenter-value">Rosi Samhari</div>
+                                </div>
+                                <div class="presenter-item">
+                                    <div class="presenter-label">Kelas</div>
+                                    <div class="presenter-value">12 RPL Satu</div>
+                                </div>
+                                <div class="presenter-item">
+                                    <div class="presenter-label">Tema Presentasi</div>
+                                    <div class="presenter-value">Layanan Pengembangan Website</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="logo-presentation">
                         <img src="https://l.top4top.io/p_3687ycwup1.jpg" alt="Lombok Web Dev Logo" class="logo-large">
                         <div class="presenter">
                             <div class="presenter-name">Lombok Web Dev</div>
-                            <div class="presenter-title">Your Digital Solution Partner</div>
+                            <div class="presenter-title">Digital Agency Partner</div>
+                            <div class="presenter-company">Solusi Website Profesional</div>
                         </div>
                     </div>
                 </div>
