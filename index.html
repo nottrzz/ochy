@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lombok Web Dev - Digitalizing Your Vision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Warna dari logo Lombok Web Dev */
+        :root {
+            --primary-blue: #1e3a8a;    /* Biru tua dari logo */
+            --secondary-blue: #3b82f6;  /* Biru medium */
+            --accent-orange: #f97316;   /* Oranye dari logo */
+            --light-blue: #60a5fa;      /* Biru muda */
+            --dark-blue: #1e40af;       /* Biru lebih gelap */
+            --light-orange: #fb923c;    /* Oranye muda */
+            --text-dark: #1f2937;       /* Teks gelap */
+            --text-light: #6b7280;      /* Teks abu-abu */
+            --white: #ffffff;
+            --light-bg: #f0f9ff;        /* Background biru sangat muda */
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 2px 15px rgba(30, 58, 138, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--primary-blue);
+        }
+        
+        .logo-text span {
+            color: var(--accent-orange);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-orange);
+        }
+        
+        /* Slide Container */
+        .slide-container {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slides {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+        
+        .slide {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px 20px;
+        }
+        
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        /* Slide 1: Judul & Brand */
+        .slide-1 {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #dbeafe 100%);
+        }
+        
+        .intro-text {
+            flex: 1;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .main-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+        
+        .main-headline span {
+            color: var(--accent-orange);
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        
+        .logo-presentation {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-large {
+            height: 200px;
+            width: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(30, 58, 138, 0.15));
+        }
+        
+        .presenter {
+            background-color: var(--white);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
+            text-align: center;
+            max-width: 350px;
+            border-top: 4px solid var(--accent-orange);
+        }
+        
+        .presenter-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+        
+        .presenter-title {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Slide 2: Masalah (The Pain Point) */
+        .slide-2 {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+        }
+        
+        .problem-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+        }
+        
+        .problem-text {
+            flex: 1;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+        }
+        
+        .highlight {
+            color: var(--accent-orange);
+        }
+        
+        .problem-stats {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            box-shadow: 0 5px 20px rgba(30, 58, 138, 0.08);
+            border-left: 4px solid var(--accent-orange);
+        }
+        
+        .stat {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+        }
+        
+        .problem-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .confused-person {
+            font-size: 200px;
+            color: rgba(249, 115, 22, 0.2);
+        }
+        
+        /* Slide 3: Layanan Utama */
+        .slide-3 {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        
+        .services-container {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .services-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+        
+        .services-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--secondary-blue);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.15);
+            border-top-color: var(--accent-orange);
+        }
+        
+        .service-icon {
+            font-size: 60px;
+            margin-bottom: 25px;
+            color: var(--secondary-blue);
+        }
+        
+        .service-card:hover .service-icon {
+            color: var(--accent-orange);
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+        
+        .service-desc {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Slide 4: Kenapa Harus Lombok Web Dev? */
+        .slide-4 {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        
+        .benefits-container {
+            width: 100%;
+        }
+        
+        .benefits-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-blue);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 4px solid var(--light-blue);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.15);
+            border-top-color: var(--accent-orange);
+        }
+        
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            color: var(--light-blue);
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            color: var(--accent-orange);
+        }
+        
+        .benefit-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+        
+        .benefit-desc {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* Slide 5: Penutup & Kontak */
+        .slide-5 {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        }
+        
+        .closing-container {
+            width: 100%;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .closing-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .closing-message {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .website-link {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .website-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: var(--light-orange);
+        }
+        
+        .contact-info {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-icon {
+            font-size: 24px;
+            color: var(--accent-orange);
+        }
+        
+        /* Navigation Dots */
+        .slide-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .nav-dot.active {
+            background-color: var(--accent-orange);
+            transform: scale(1.3);
+            border-color: var(--white);
+        }
+        
+        /* Navigation Arrows */
+        .slide-arrows {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+        
+        .arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: var(--primary-blue);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .arrow:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+            background-color: var(--accent-orange);
+            color: var(--white);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .slide-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .main-headline {
+                font-size: 2.8rem;
+            }
+            
+            .section-title, .services-title, .benefits-title {
+                font-size: 2.2rem;
+            }
+            
+            .services-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .problem-content {
+                flex-direction: column;
+            }
+            
+            .closing-headline {
+                font-size: 3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .main-headline {
+                font-size: 2.2rem;
+            }
+            
+            .logo-large {
+                height: 150px;
+            }
+            
+            .slide-nav {
+                right: 15px;
+            }
+            
+            .slide-arrows {
+                bottom: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-img {
+                height: 35px;
+            }
+            
+            .website-link {
+                font-size: 1.5rem;
+                padding: 15px 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-img {
+                height: 30px;
+            }
+            
+            .logo-large {
+                height: 120px;
+            }
+            
+            .presenter {
+                padding: 15px 20px;
+            }
+            
+            .closing-headline {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="https://l.top4top.io/p_3687ycwup1.jpg" alt="Lombok Web Dev Logo" class="logo-img">
+                <div class="logo-text">Lombok<span>Web Dev</span></div>
+            </div>
+            <div class="nav-links">
+                <a href="#slide1" class="nav-link active" data-slide="0">Beranda</a>
+                <a href="#slide2" class="nav-link" data-slide="1">Masalah</a>
+                <a href="#slide3" class="nav-link" data-slide="2">Layanan</a>
+                <a href="#slide4" class="nav-link" data-slide="3">Keunggulan</a>
+                <a href="#slide5" class="nav-link" data-slide="4">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide Container -->
+    <div class="slide-container">
+        <div class="slides">
+            <!-- Slide 1: Judul & Brand -->
+            <div class="slide slide-1">
+                <div class="slide-content">
+                    <div class="intro-text">
+                        <div class="greeting">Selamat pagi semuanya</div>
+                        <h1 class="main-headline">Digitalizing <span>Your Vision</span></h1>
+                        <p class="description">Hari ini saya ingin memperkenalkan sebuah agensi digital yang sedang berkembang pesat di daerah kita, yaitu Lombok Web Dev. Kami adalah solusi bagi siapa saja yang ingin punya kehadiran profesional di dunia maya.</p>
+                    </div>
+                    <div class="logo-presentation">
+                        <img src="https://l.top4top.io/p_3687ycwup1.jpg" alt="Lombok Web Dev Logo" class="logo-large">
+                        <div class="presenter">
+                            <div class="presenter-name">Lombok Web Dev</div>
+                            <div class="presenter-title">Your Digital Solution Partner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Masalah (The Pain Point) -->
+            <div class="slide slide-2">
+                <div class="slide-content">
+                    <div class="problem-content">
+                        <div class="problem-text">
+                            <h2 class="section-title">Bisnis Bagus, Tapi <span class="highlight">Nggak Ketemu di Google?</span></h2>
+                            <p class="description">Banyak orang punya produk bagus, tapi kalau dicari di internet nggak ketemu. Kenapa? Karena mereka cuma ngandelin media sosial. Padahal, 70% orang lebih percaya bisnis yang punya website resmi. Di sinilah Lombok Web Dev hadir buat nutup celah itu.</p>
+                            
+                            <div class="problem-stats">
+                                <div class="stat">70%</div>
+                                <p>konsumen lebih percaya bisnis yang memiliki website profesional</p>
+                            </div>
+                        </div>
+                        <div class="problem-image">
+                            <div class="confused-person">
+                                <i class="fas fa-user-confused"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Layanan Utama -->
+            <div class="slide slide-3">
+                <div class="slide-content">
+                    <div class="services-container">
+                        <h2 class="services-title">Apa Yang Kami Lakukan?</h2>
+                        <p class="services-subtitle">Apa sih yang Lombok Web Dev lakuin? Singkatnya, kami bikin website yang nggak cuma cantik, tapi juga fungsional. Website-nya cepat, enak dilihat di HP, dan yang paling penting: SEO Friendly.</p>
+                        
+                        <div class="services-grid">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <h3 class="service-name">Custom Web Development</h3>
+                                <p class="service-desc">Website yang dirancang khusus untuk kebutuhan bisnis Anda, dengan desain modern dan performa optimal.</p>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h3 class="service-name">SEO Optimization</h3>
+                                <p class="service-desc">Website klien kami didesain supaya gampang muncul di halaman pertama Google.</p>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3 class="service-name">Responsive Design</h3>
+                                <p class="service-desc">Website yang enak dilihat di semua perangkat, dari desktop hingga smartphone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Kenapa Harus Lombok Web Dev? -->
+            <div class="slide slide-4">
+                <div class="slide-content">
+                    <div class="benefits-container">
+                        <h2 class="benefits-title">Kenapa Harus Lombok Web Dev?</h2>
+                        
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h3 class="benefit-name">Fast Delivery</h3>
+                                <p class="benefit-desc">Proses pembuatan website cepat dan efisien, tanpa mengorbankan kualitas hasil.</p>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h3 class="benefit-name">Affordable</h3>
+                                <p class="benefit-desc">Harga yang masuk akal untuk semua kalangan, dari UMKM hingga perusahaan besar.</p>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <h3 class="benefit-name">Professional Support</h3>
+                                <p class="benefit-desc">Kami nggak lepas tangan setelah web jadi—ada support teknis yang siap membantu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Penutup & Kontak -->
+            <div class="slide slide-5">
+                <div class="slide-content">
+                    <div class="closing-container">
+                        <h2 class="closing-headline">Build Your Future Now</h2>
+                        <p class="closing-message">Kesimpulannya, kalau mau bisnis bertahan lama, kita butuh 'rumah digital' yang paten. Teman-teman bisa cek langsung portofolionya di website resmi kami.</p>
+                        
+                        <a href="https://bitbasedigital.com" target="_blank" class="website-link">lombokwebdev.com</a>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>info@lombokwebdev.com</div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>+62 812 3456 7890</div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>Lombok, NTB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Navigation Dots -->
+    <div class="slide-nav">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+        <div class="nav-dot" data-slide="3"></div>
+        <div class="nav-dot" data-slide="4"></div>
+    </div>
+
+    <!-- Slide Navigation Arrows -->
+    <div class="slide-arrows">
+        <div class="arrow prev-arrow">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="arrow next-arrow">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <script>
+        // Slide Navigation
+        const slides = document.querySelector('.slides');
+        const slideCount = 5;
+        let currentSlide = 0;
+        
+        // Navigation dots
+        const navDots = document.querySelectorAll('.nav-dot');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Navigation arrows
+        const prevArrow = document.querySelector('.prev-arrow');
+        const nextArrow = document.querySelector('.next-arrow');
+        
+        // Function to update slide position
+        function goToSlide(slideIndex) {
+            if (slideIndex < 0) slideIndex = slideCount - 1;
+            if (slideIndex >= slideCount) slideIndex = 0;
+            
+            currentSlide = slideIndex;
+            slides.style.transform = `translateX(-${currentSlide * 20}%)`;
+            
+            // Update active navigation dot
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Update active navigation link
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Initialize navigation dots
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+        
+        // Initialize navigation links
+        navLinks.forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToSlide(index);
+            });
+        });
+        
+        // Navigation arrows
+        prevArrow.addEventListener('click', () => {
+            goToSlide(currentSlide - 1);
+        });
+        
+        nextArrow.addEventListener('click', () => {
+            goToSlide(currentSlide + 1);
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                goToSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight') {
+                goToSlide(currentSlide + 1);
+            }
+        });
+        
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.querySelector('.slide-container').addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.querySelector('.slide-container').addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left - next slide
+                goToSlide(currentSlide + 1);
+            }
+            
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right - previous slide
+                goToSlide(currentSlide - 1);
+            }
+        }
+        
+        // Auto-advance slides (optional, can be removed if not needed)
+        // setInterval(() => {
+        //     goToSlide(currentSlide + 1);
+        // }, 8000);
+    </script>
+</body>
+</html>
